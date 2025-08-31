@@ -5,7 +5,7 @@ import { FollowUpStepRef, FollowUpStep } from "./FollowUpStep";
 import { PreviewStep } from "./PreviewStep";
 import { StepNavigation } from "./StepNavigation";
 import axios from "axios";
-import { api } from "../api/aiApi";
+import { api } from "../api/productApi";
 
 const FORM_STEPS: FormStep[] = [
   { id: 1, title: "Product Details", description: "Basic information about your product" },

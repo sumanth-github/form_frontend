@@ -3,7 +3,7 @@ import { Eye, Download, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 import { ProductData } from '../types/Product';
 import { getCategoryColor } from '../utils/categories';
-import { api } from '../api/aiApi';
+import { api } from '../api/productApi';
 interface PreviewStepProps {
   data: ProductData;
   isSubmitted: boolean;
