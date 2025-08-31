@@ -1,7 +1,9 @@
-import React from 'react';
-import { Package, FileText } from 'lucide-react';
-import { ProductData, ProductCategory } from '../types/Product';
-import { PRODUCT_CATEGORIES, getCategoryColor } from '../utils/categories';
+import React, { Fragment } from "react";
+import { Package, FileText } from "lucide-react";
+import { ProductData, ProductCategory } from "../types/Product";
+import { PRODUCT_CATEGORIES, getCategoryColor } from "../utils/categories";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid";
 
 interface ProductDetailsStepProps {
   data: ProductData;
@@ -23,8 +25,12 @@ export const ProductDetailsStep: React.FC<ProductDetailsStepProps> = ({
       </div>
 
       <div className="space-y-6">
+        {/* Product Name */}
         <div>
-          <label htmlFor="productName" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label
+            htmlFor="productName"
+            className="block text-sm font-semibold text-gray-700 mb-2"
+          >
             Product Name *
           </label>
           <input
@@ -37,34 +43,87 @@ export const ProductDetailsStep: React.FC<ProductDetailsStepProps> = ({
           />
         </div>
 
+        {/* Category */}
         <div>
-          <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label
+            htmlFor="category"
+            className="block text-sm font-semibold text-gray-700 mb-2"
+          >
             Category *
           </label>
-          <select
-            id="category"
-            value={data.category}
-            onChange={(e) => onUpdate({ category: e.target.value as ProductCategory })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
+          <Listbox
+            value={data.category || ""}
+            onChange={(val: ProductCategory) => onUpdate({ category: val })}
           >
-            <option value="">Select a category</option>
-            {PRODUCT_CATEGORIES.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+            <div className="relative">
+              <Listbox.Button className="relative w-full cursor-pointer bg-white border border-gray-300 rounded-xl py-3 pl-4 pr-10 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                <span className="block truncate">
+                  {data.category || "Select a category"}
+                </span>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <ChevronUpDownIcon className="h-5 w-5 text-gray-400" />
+                </span>
+              </Listbox.Button>
+
+              <Transition
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Listbox.Options className="absolute mt-1 max-h-44 w-full overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  {PRODUCT_CATEGORIES.map((cat) => (
+                    <Listbox.Option
+                      key={cat}
+                      value={cat}
+                      className={({ active }) =>
+                        `relative cursor-pointer select-none py-2 pl-4 pr-10 ${
+                          active ? "bg-blue-100 text-blue-900" : "text-gray-900"
+                        }`
+                      }
+                    >
+                      {({ selected }) => (
+                        <>
+                          <span
+                            className={`block truncate ${
+                              selected ? "font-semibold" : "font-normal"
+                            }`}
+                          >
+                            {cat}
+                          </span>
+                          {selected && (
+                            <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-blue-600">
+                              <CheckIcon className="h-5 w-5" />
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </Listbox>
+
           {data.category && (
             <div className="mt-2">
-              <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium border ${getCategoryColor(data.category)}`}>
+              <span
+                className={`inline-flex px-3 py-1 rounded-full text-xs font-medium border ${getCategoryColor(
+                  data.category
+                )}`}
+              >
                 {data.category}
               </span>
             </div>
           )}
         </div>
 
+        {/* Description */}
         <div>
-          <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label
+            htmlFor="description"
+            className="block text-sm font-semibold text-gray-700 mb-2"
+          >
             <div className="flex items-center gap-2">
               <FileText className="w-4 h-4" />
               Description *
@@ -86,4 +145,3 @@ export const ProductDetailsStep: React.FC<ProductDetailsStepProps> = ({
     </div>
   );
 };
-
