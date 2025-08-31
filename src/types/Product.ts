@@ -13,7 +13,17 @@ export interface QA {
   question: string;
   answer: string;
 }
-export type ProductCategory = 'Food' | 'Wellness' | 'Eco';
+export type ProductCategory =
+  | 'Food'
+  | 'Wellness'
+  | 'Eco'
+  | 'Beauty'
+  | 'Tech'
+  | 'Fashion'
+  | 'Fitness'
+  | 'Home'
+  | 'Education';
+
 
 export interface FormStep {
   id: number;
