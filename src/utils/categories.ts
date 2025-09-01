@@ -3,6 +3,8 @@ import { ProductCategory } from '../types/Product';
 // Add more categories here
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
   'Food',
+  'Vegetable',
+  'Fruit',
   'Wellness',
   'Eco',
   'Beauty',
@@ -16,6 +18,10 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
 export const getCategoryColor = (category: ProductCategory): string => {
   switch (category) {
     case 'Food':
+      return 'bg-orange-100 text-orange-800 border-orange-200';
+    case 'Vegetable':
+      return 'bg-orange-100 text-orange-800 border-orange-200';
+    case 'Fruit':
       return 'bg-orange-100 text-orange-800 border-orange-200';
     case 'Wellness':
       return 'bg-purple-100 text-purple-800 border-purple-200';

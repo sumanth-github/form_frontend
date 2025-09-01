@@ -13,7 +13,7 @@ export interface QA {
   question: string;
   answer: string;
 }
-export type ProductCategory ='Food' | 'Wellness'| 'Eco'
+export type ProductCategory ='Food' | 'Vegetable' | 'Fruit' | 'Wellness'| 'Eco'
   | 'Beauty'
   | 'Tech'
   | 'Fashion'
