@@ -13,13 +13,9 @@ export interface QA {
   question: string;
   answer: string;
 }
-export type ProductCategory ='Food' | 'Vegetable' | 'Fruit' | 'Wellness'| 'Eco'
+export type ProductCategory ='Food' | 'Fruits & Vegetables' | 'Meat, Seafood & Dairy' | 'Wellness'| 'Eco'
   | 'Beauty'
-  | 'Tech'
-  | 'Fashion'
-  | 'Fitness'
-  | 'Home'
-  | 'Education';
+  | 'Fashion';
 
 export interface FormStep {
   id: number;
